@@ -1,0 +1,2 @@
+nodemon - esculta os arquivos js da aplicação e toda vez que for alterado algo ele reseta o 
+servidor automaticamente;
