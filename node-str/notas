@@ -1,2 +1,6 @@
 nodemon - esculta os arquivos js da aplicação e toda vez que for alterado algo ele reseta o 
 servidor automaticamente;
+
+Controllers-respondem pelas requisições do usuário
+
+Para rodar o node no terminal-> node ./bin/server.js

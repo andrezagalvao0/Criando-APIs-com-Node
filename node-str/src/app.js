@@ -2,11 +2,18 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
 const app = express();
 const router = express.Router();
 
-//Carregas as rotas
+//conecta ao banco
+mongoose.connect('mongodb+srv://balta:balta@cluster0.pbduh.mongodb.net/<dbname>');
+
+//Carrea os Models
+const Prodct = require('./models/product');
+
+//Carregar as rotas
 const indexRoute = require('./routes/index-route');
 const productRoute = require('./routes/product-route');
 

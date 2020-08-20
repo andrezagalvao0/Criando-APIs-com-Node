@@ -2,6 +2,7 @@
 
 const express = require('express');
 const router = express.Router();
+const controller = require('../controller/product-controller'); //referenciar o controller
 
 //get - para obter informações
 router.get('/', (req, res, next) => {  //esse '/' é a rota
@@ -11,21 +12,15 @@ router.get('/', (req, res, next) => {  //esse '/' é a rota
     });
 });
 
+router.get('/', controller.get);
+router.get('/:slug', controller.getBySlug);
+router.get('/admin/:id', controller.getById);
+router.get('/tags/:tags', controller.getByTag);
 //post- para enviar informações
-router.post('/', (req, res, next) => {
-    res.status(201).send(req.body); //res - enviando uma resposta; 201 - é para representar o created; req.body - para pegar o corpo da requisição
-});
+router.post('/', controller.post);
+router.put('/:id', controller.put);
+router.delete('/', controller.delete);
 
-router.put('/:id', (req, res, next) => {
-    const id = req.params.id;//recupera um paramentro
-    res.status(200).send({
-        id: id,
-        item: req.body
-    }); 
-});
 
-router.delete('/', (req, res, next) => {
-    res.status(200).send(req.body); 
-});
 
 module.exports = router;
