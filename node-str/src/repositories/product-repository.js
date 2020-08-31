@@ -3,41 +3,44 @@
 const mongoose = require('mongoose');
 const Product = mongoose.model('Product');
 
-exports.get = (req, res, next) => {     
-    return Product
-        .find({
-             active: true
-            }, 'title price slug');
-}
-
-exports.getBySlug = (slug) => {
-    return Product
-    .findOne({
-         slug: slug,
-         active: true
-        }, 'title description price slug tags');
-}
-
-exports.getById = (id) => {
-    return Product
-        .findById(id);
-}
-
-exports.getByTag = (tag) => {
-  return  Product
-    .find({
-        tags: tag,
+exports.get = async() => {    //async introduz os métodos 
+    const res = await Product.find({  //await - respera a resposta
         active: true
-    }, 'title description price slug tags')
+    }, 'title price slug');
+    return res;
 }
 
-exports.create = (data) => {
+exports.getBySlug = async(slug) => {
+    const res = await Product
+        .findOne({
+            slug: slug,
+            active: true
+            }, 'title description price slug tags');
+    return res;
+}
+
+exports.getById = async(id) => {
+    const res = await Product
+        .findById(id);
+    return res;
+}
+
+exports.getByTag = async(tag) => {
+  const res = Product
+        .find({
+            tags: tag,
+            active: true
+        }, 'title description price slug tags');
+    return res;
+}
+
+exports.create = async(data) => {
     var product = new Product(data); //persistindo um item usando o mongoose
-    return product.save(); //salvar o item no BD
+    await product.save(); //salvar o item no BD
 }
 
-exports.update = (id, data) => {
-    return Product
+exports.update = async(id, data) => {
+    await Product
         .findByIdAndUpdate(id, {
             $set: {
                 title: data.title,
@@ -48,7 +51,7 @@ exports.update = (id, data) => {
         })
 }
 
-exports.delete = (id) => {
-    return Product
+exports.delete = async(id) => {
+    await Product
         .findOneAndRemove(req.body.id);
 }
