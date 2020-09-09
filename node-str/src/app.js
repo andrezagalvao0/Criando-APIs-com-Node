@@ -3,12 +3,13 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const config = require('./config');
 
 const app = express();
 const router = express.Router();
 
 //conecta ao banco
-mongoose.connect('mongodb+srv://balta:balta@cluster0.pbduh.mongodb.net/%3Cdbname%3E');
+mongoose.connect(config.connectionString);
 
 //Carrea os Models
 const Product = require('./models/product');
